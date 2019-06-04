@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <aside class="post-right hidden-xs">
             </section></section>
 
@@ -28,16 +29,16 @@
                 </ul>
             </section>
 
-            </section>
             <section class="widget post-right-item"><h4 class="post-right-title">所有标签</h4>
                 <div class="tags">
-                    {% for t in tag %}
+                    {% for t in tags %}
                         <a href="/tag/{{ t.name }}">{{ t.name }}</a>
                     {% endfor %}
 
                 </div>
             </section>
-            </section><!-- /关注我们 -->
+
+    <!-- /关注我们 -->
             <div class="post-right-item">
                 <h4 class="post-right-title">关注我们</h4>
                 <div class="wid-about">
@@ -47,7 +48,7 @@
                 <div class="wid-about">
                     <p><strong>联系方式:</strong></p>
                     <p>QQ:1457753144</p>
-                    <p>Email：1457753144@qq.com</p>
+                    <p>Email：limou09@163.com</p>
                 </div>
             </div>
 

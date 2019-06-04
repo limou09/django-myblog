@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,9 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-title" content="limou的博客">
 
-    {% block title %}
-        <title>base</title>
-    {% endblock %}
+    <title>{% block title %}base{% endblock %}</title>
 
 <link rel='stylesheet' id='bootstrap-css'  href="{% static 'css/bootstrap.min.css' %}" type='text/css' media='all' />
 <link rel='stylesheet' id='fontawesome-css'  href="{% static 'css/font-awesome.min.css' %}" type='text/css' media='all' />
@@ -70,8 +69,8 @@
 </ul>
 
 </nav>
-    <form method="get" class="index-search  hidden-xs" action="{% url 'blog:index' %}s/" >
-        <input class="text" name="search" type="text" placeholder="输入关键字" value="">
+    <form method="get" class="index-search  hidden-xs" action="/search/" >
+        <input class="text" name="q" type="text" placeholder="输入关键字" value="">
         <button class="submit" type="submit"><i class="fa fa-search"></i></button>
     </form>
 </div>
@@ -89,6 +88,7 @@
     · <a href="www.limou09.top">limou09</a>
     · <a href="" target="_blank">湘ICP备111111</a> 版权所有 © limou</div>
 </footer>
+
 <script type="text/javascript" src="{% static 'js/view-history.js' %}"></script>
 <script type='text/javascript' src="{% static 'js/push.js' %}" ></script>
 <script type='text/javascript' src="{% static 'js/jquery.min.js' %}"></script>

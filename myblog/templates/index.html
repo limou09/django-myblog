@@ -2,9 +2,7 @@
 {% load staticfiles %}
 
 
-    {% block title %}
-        <title>Python</title>
-    {% endblock %}
+    {% block title %}Python{% endblock %}
 
 
 
@@ -17,6 +15,7 @@
                     <div id="featured" class="raxus-slider" data-autoplay="3000" data-keypress="false"
                          data-thumbnail="bottom">
                         <ul class="slider-relative" id="relative">
+
                             {% for ban in banner %}
                                 <li class="slide fix-width">
                                     <a href="{{ ban.link_url }}" title="{{ ban.text_info }}">
@@ -93,7 +92,7 @@
         <!-- /post-left -->
         <!-- /post-right -->
         <aside class="post-right hidden-xs">
-            </section>
+
             <section class="widget post-right-item">
                 <h4 class="post-right-title">热门文章排行</h4>
                 <ol class="hot-list">
@@ -102,53 +101,9 @@
                     {% endfor %}
                 </ol>
             </section>
-            </section>
-            </section>
 
+        {% include 'right.html' %}
 
-            <section class="widget post-right-item"><h4 class="post-right-title">热门推荐</h4>
-                <ul class="post-new">
-
-                    {% for re in remen %}
-                        <li>
-                            <div class="img">
-                                <a href="{% url 'blog:index' %}show-{{ re.id }}.html" title="{{ re.title }}"><img src="/media/{{ re.img }}"
-                                                                       srcset="/media/{{ re.img }}" alt="{{ re.title }}"
-                                                                       class="wp-post-image" width="120"
-                                                                       height="80"/></a>
-                            </div>
-                            <div class="text">
-                                <a href="{% url 'blog:index' %}show-{{ re.id }}.html" title="{{ re.title }}" target="_blank">{{ re.title }}</a>
-                            </div>
-                        </li>
-                    {% endfor %}
-
-                </ul>
-
-            </section>
-            </section>
-            <section class="widget post-right-item"><h4 class="post-right-title">所有标签</h4>
-                <div class="tags">
-                    {% for t in tag %}
-                        <a href="/tag/{{ t.name }}">{{ t.name }}</a>
-                    {% endfor %}
-                </div>
-            </section>
-            </section><!-- /关注我们 -->
-            <div class="post-right-item">
-                <h4 class="post-right-title">关注我们</h4>
-                <div class="wid-about">
-                    <p>Python学院，欢迎关注！</p>
-                    <img src="{% static 'picture/weixinqr.jpg' %}" alt="微信二维码-互联网的一些事" width="160" height="160">
-                </div>
-                <div class="wid-about">
-                    <p><strong>联系方式:</strong></p>
-                    <p>QQ:1457753144</p>
-                    <p>Email：1457753144@qq.com</p>
-                </div>
-            </div>
-
-        </aside>
 
         <div class="FriendLink hidden-xs clearfix">
             <div class="title"><h3>友情链接：</h3></div>

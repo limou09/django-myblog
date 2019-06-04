@@ -13,7 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
+import xadmin
 from django.urls import path,include,re_path
 #   导入静态文件模块
 from django.views.static import serve
@@ -21,12 +22,12 @@ from django.conf import settings
 from captcha.views import captcha_refresh
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', xadmin.site.urls),
 
     #   博客
-    path('', include(('blog.urls','blog'),namespace='blog')),
+    path('', include(('blog.urls', 'blog'), namespace='blog')),
     #   用户登录注册
-    path('login/', include(('login.urls','login'),namespace='login')),
+    path('login/', include(('login.urls', 'login'), namespace='login')),
 
     #  富文本路由
     path('ueditor/', include('DjangoUeditor.urls')),
@@ -36,5 +37,8 @@ urlpatterns = [
     #   验证码
     path('captcha/', include('captcha.urls')),
     re_path(r'refresh/$', captcha_refresh, name='captcha-refresh'),
+
+    #   全文检索
+    re_path(r'^search/', include('haystack.urls')),
 
 ]
