@@ -1,0 +1,78 @@
+{% extends 'login/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>设置</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/item.css' %}">
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="tabs-profile">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="nav-switch">
+                <a href="#" aria-controls="home" role="tab">
+                    <i class="icon-settings" aria-hidden="true" title="Settings"></i>
+                    评论 (0)
+                </a>
+            </li>
+            <li role="presentation" class="nav-switch">
+                <a href="#" aria-controls="home" role="tab">
+                    <i class="icon-settings" aria-hidden="true" title="Settings"></i>
+                    帖子  (0)
+                </a>
+            </li>
+
+
+            <li role="presentation" class="active nav-switch">
+                <a href="#" aria-controls="home" role="tab">
+                    <i class="icon-settings" aria-hidden="true" title="Settings"></i>
+                    个人设置
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="user-info">
+        <h3>个人信息:</h3>
+
+        <form action="" method="post" enctype="multipart/form-data" id="user-form">
+        {% csrf_token %}
+            <ul id="user-ul">
+                <li><img src="/media/{{ user.photo }}" style="width: 140px;height: 140px;border-radius: 50%" alt=""></li>
+                <li>昵称：{{ user.nickname }}</li>
+                <li>性别：<input type="radio" {% if user.gender %}checked {% endif %} name="gender">男<input type="radio" {% if not user.gender %}checked {% endif %} name="gender">女</li>
+                <li>邮箱：{{ user.email }}</li>
+                <li>用户名：{{ user.username }}<span>{{ error.username.0 }}</span></li>
+                <p><input type="button" value="编辑信息" id="edit"></p>
+            </ul>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+    $(function(){
+        $('#edit').click(function(){
+            $('#user-ul').remove()
+            $('#user-form').append('<ul id="user-ul-li">\n' +
+                '                <li><img src="/media/{{ user.photo }}" style="width: 140px;height: 140px;border-radius: 50%" alt=""><br><input\n' +
+                '                        type="file" name="photo"></li>\n' +
+                '                <li>昵称：<input type="text" name="nickname" value="{{ user.nickname }}"></li>\n' +
+                '                <li>性别：<input type="radio" {% if user.gender %}checked {% endif %} name="gender">男<input type="radio" {% if not user.gender %}checked {% endif %} name="gender">女</li>\n' +
+                '                <li>邮箱：<input type="email" value="{{ user.email }}" name="email"></li>\n' +
+                '                <li>用户名：<input type="text" value="{{ user.username }}" name="username"></li>\n' +
+                '                <p><input type="submit" value="保存" id="edit"></p>\n' +
+                '            </ul>')
+        })
+    })
+    </script>
+{% endblock %}

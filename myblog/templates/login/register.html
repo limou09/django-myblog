@@ -1,0 +1,112 @@
+{% extends 'login/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>注册</title>
+{% endblock %}
+
+{% block css %}
+    <link rel='stylesheet' href='{% static 'css/register.css' %}'type='text/css' media='all' />
+    <link rel="stylesheet" href="{% static 'css/item.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <div class="container">
+        <div class="col-md-offset-4 col-md-4">
+            <form class="form-register" action="/login/register/" method="post" enctype="multipart/form-data">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                {% csrf_token %}
+
+
+                <h2 class="text-center">欢迎注册</h2>
+
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.username.label }}:</span>
+                    {{ register_form.username }}
+                    <span class="form-error">{{ error.username.0 }}</span>
+                </div>
+
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.password1.label }}:</span>
+                    {{ register_form.password1 }}
+                    <span class="form-error">{{ error.password1.0 }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.password2.label }}:</span>
+                    {{ register_form.password2 }}
+                    <span class="alert alert-warning">{{ error.password2.0 }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.sex.label }}:</span>
+                    {{ register_form.sex }}
+                </div>
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.email.label }}:</span>
+                    {{ register_form.email }}
+                    <span class="form-error">{{ error.email.0 }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.nickname.label }}:</span>
+                    {{ register_form.nickname }}
+                    <span class="form-error">{{ error.nickname.0 }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.photo.label }}:</span>
+                    {{ register_form.photo }}<br>
+                    <span class="form-error">{{ error.photo.0 }}</span>
+                </div>
+                <div class="form-group">
+                    <span class="label-span">{{ register_form.captcha.label }}:</span>
+                    {{ register_form.captcha }}
+                    {{ register_form.captcha.errors }}
+                </div>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">提交</button>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+
+    <script>
+        $(function(){
+            {#滑过元素变小手#}
+           $('.captcha').css({
+               'cursor':'pointer'
+           });
+           {# 点击刷新#}
+            $('.captcha').click(function(){
+                {#alert('click');#}
+                $.getJSON('/captcha/refresh/',function(result){
+                    $('.captcha').attr('src',result['image_url']);
+                    $('#id_captcha_0').val(result['key'])
+                });
+            });
+
+            {#id_captcha_1是输入框的id，当失去焦点是触发函数#}
+            $('#id_captcha_1').blur(function(){
+                {#alert('123');#}
+                json_data = {
+                    {#获取输入框和隐藏字段id_captcha_0的数值#}
+                    'response':$('#id_captcha_1').val(),
+                    'hashkey':$('#id_captcha_0').val()
+                }
+                {#发送数据到/login/ajax_code/#}
+                $.getJSON('/login/ajax_code/',json_data, function(data){
+                    $('#captcha_status').remove()
+                    {#status返回1为验证码正确,status返回0为验证码错误,在输入框后面写入提示信息#}
+                    if (data['status'] == false){
+                        $('#id_captcha_1').after("<span id='captcha_status'>*验证码错误</span>")
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

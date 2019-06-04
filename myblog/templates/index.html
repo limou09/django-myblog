@@ -1,0 +1,164 @@
+﻿{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+    {% block title %}
+        <title>Python</title>
+    {% endblock %}
+
+
+
+    {% block content %}
+    <div id="main-container" class="container clearfix">
+        <section class="post-left">
+            <div class="row">
+                <!-- /banner图 -->
+                <div class="col-md-6">
+                    <div id="featured" class="raxus-slider" data-autoplay="3000" data-keypress="false"
+                         data-thumbnail="bottom">
+                        <ul class="slider-relative" id="relative">
+                            {% for ban in banner %}
+                                <li class="slide fix-width">
+                                    <a href="{{ ban.link_url }}" title="{{ ban.text_info }}">
+                                        <img src="/media/{{ ban.img }}" srcset="{% url 'blog:index' %}media/{{ ban.img }}" alt="{{ ban.text_info }}"
+                                             class="wp-post-image" width="370" height="290"/></a>
+                                    <span class="text ani-left"><strong>{{ ban.text_info }}</strong></span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!-- /banner图 -->
+
+                <!-- 首页推荐 -->
+                <div class="col-md-6">
+                    <div class="hotread ">
+                        <div class="title">推荐阅读</div>
+
+                        {% for t in tui %}
+                            <div class="caption">
+                            {% autoescape off %}
+                                <h4><a href="{% url 'blog:index' %}show-{{ t.id }}.html" title="{{ t.title }}" rel="bookmark">{{ t.title }}</a></h4>
+                                <p>{{ t.excerpt|truncatechars:'80' }}</p>
+                            {% endautoescape %}
+                            </div>
+                        {% endfor %}
+
+
+                        
+                    </div>
+                </div>
+                <!-- /今日头条 -->
+            </div>
+            <!-- /文章列表 -->
+            <div class="index-main clearfix">
+                <div class="main-title">
+                    <h4 class="post-left-title fl">最新文章</h4>
+                    <div class="fr"></div>
+                </div>
+
+                <div class="row">
+
+                    {% for a in article %}
+                        <div class="article-box clearfix excerpt-1">
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="{% url 'blog:index' %}show-{{ a.id }}.html" title="{{ a.title }}">
+                                        <img src="media/{{ a.img }}"
+                                             srcset="media/{{ a.img }}"
+                                             alt="{{ a.title }}" class="wp-post-image" width="240" height="160"/></a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <h2><a href="{% url 'blog:index' %}show-{{ a.id }}.html" target="_blank"
+                                       title="{{ a.title }}">{{ a.title }}</a></h2>
+                                <p class="txtcont hidden-xs"><a href="{% url 'blog:index' %}show-{{ a.id }}.html" target="_blank"
+                                                                title="{{ a.title }}">{{ a.excerpt }}</a></p>
+                                <div class="meta"><span class="label label-info"><a
+                                        href="{% url 'blog:index' %}list-{{ a.category.id }}.html">{{ a.category.name }}</a></span>
+                                    <time class="item"><i class="fa fa-clock-o"></i>{{ a.create_time|date:"Y年m月d日" }}
+                                    </time>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                </div>
+                <!-- /文章列表 -->
+        </section>
+        <!-- /post-left -->
+        <!-- /post-right -->
+        <aside class="post-right hidden-xs">
+            </section>
+            <section class="widget post-right-item">
+                <h4 class="post-right-title">热门文章排行</h4>
+                <ol class="hot-list">
+                    {% for h in hot %}
+                        <li><a href="{% url 'blog:index' %}show-{{ h.id }}.html" title="{{ h.title }}">{{ h.title }}</a></li>
+                    {% endfor %}
+                </ol>
+            </section>
+            </section>
+            </section>
+
+
+            <section class="widget post-right-item"><h4 class="post-right-title">热门推荐</h4>
+                <ul class="post-new">
+
+                    {% for re in remen %}
+                        <li>
+                            <div class="img">
+                                <a href="{% url 'blog:index' %}show-{{ re.id }}.html" title="{{ re.title }}"><img src="/media/{{ re.img }}"
+                                                                       srcset="/media/{{ re.img }}" alt="{{ re.title }}"
+                                                                       class="wp-post-image" width="120"
+                                                                       height="80"/></a>
+                            </div>
+                            <div class="text">
+                                <a href="{% url 'blog:index' %}show-{{ re.id }}.html" title="{{ re.title }}" target="_blank">{{ re.title }}</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+
+            </section>
+            </section>
+            <section class="widget post-right-item"><h4 class="post-right-title">所有标签</h4>
+                <div class="tags">
+                    {% for t in tag %}
+                        <a href="/tag/{{ t.name }}">{{ t.name }}</a>
+                    {% endfor %}
+                </div>
+            </section>
+            </section><!-- /关注我们 -->
+            <div class="post-right-item">
+                <h4 class="post-right-title">关注我们</h4>
+                <div class="wid-about">
+                    <p>Python学院，欢迎关注！</p>
+                    <img src="{% static 'picture/weixinqr.jpg' %}" alt="微信二维码-互联网的一些事" width="160" height="160">
+                </div>
+                <div class="wid-about">
+                    <p><strong>联系方式:</strong></p>
+                    <p>QQ:1457753144</p>
+                    <p>Email：1457753144@qq.com</p>
+                </div>
+            </div>
+
+        </aside>
+
+        <div class="FriendLink hidden-xs clearfix">
+            <div class="title"><h3>友情链接：</h3></div>
+            <ul class="clears">
+                {% for L in link %}
+                    <li><a href="{{ L.linkurl }}" target="_blank">{{ L.name }}</a></li>
+                {% endfor %}
+                
+            </ul>
+        </div>
+    </div>
+
+    {% endblock %}

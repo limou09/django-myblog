@@ -1,0 +1,12 @@
+.dropdown-menu{
+    left: 490px;
+    width: 200px;
+    text-align: center;
+}
+.dropdown-item{
+    vertical-align: middle;
+    text-align: left;
+    height: 30px;
+    width: 200px;
+    margin-top: 20px;
+}

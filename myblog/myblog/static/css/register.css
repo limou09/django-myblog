@@ -1,0 +1,22 @@
+
+
+.form-group{
+    margin-top: 20px;
+}
+
+#id_captcha_1{
+    width: 85px;
+    height: 40px;
+}
+
+.form-group .label-span{
+    display: inline-block;
+    width: 60px;
+}
+
+#captcha_status{
+    color: red;
+}
+#id_photo{
+    display: inline-block;
+}

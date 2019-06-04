@@ -1,0 +1,64 @@
+blog的功能相对比较简单，主要以文章为主。
+
+blog的功能主要分为：
+	1.网站首页
+	2.文章分类
+	3.文章内容
+	4.幻听图片
+	5.文章推荐
+	6.文章排行
+	7.热门推荐
+	8.文章搜索
+	9.友情链接
+1、网站首页：
+	网站首页是整个网站的主界面，也是网站入口。主要展示blog的动态信息和blog功能。
+2、文章分类：
+	主要展示文章分类信息和链接，方便用户查看。文章分类可以在后台添加删除
+3、文章内容：
+	主要展示文章分类、文章所属标签、文章标题、文章内容、作者信息、发布时间。可以通过后台增删改
+4、幻听图片：
+	在网站首页展示，展示重要信息。可以通过后台增删改
+5、文章推荐
+	推荐一些重要的文章。可以通过后台进行推荐
+6、文章排行
+	根据文章的浏览量进行排行
+7、热门推荐
+	推荐重要文章
+8、文章搜索
+	通过关键词搜索文章
+9、友情链接
+	展示相互链接的网站名称及链接，可以通过后台增删
+10、详情页
+	展示文章详情、用户信息等。可以通过后台修改
+
+数据库设计与分析
+
+文章表（Article）：
+	title	CharField类型,长度100		文章标题
+	category	ForeignKey		文章分类
+	tags		ManyToManyField		文章标签
+	body		TextField		文章内容
+	user		ForeignKey		关联用户表
+	views		PositiveIntegerField	浏览量
+	tui		ForeignKey		推荐列表
+	create_time	DateTimeField		发布时间
+
+分类表（category）：
+	name	CharField类型,长度30		分类名
+
+
+标签表（tag）：
+	name	CharField类型,长度30		标签名
+
+推荐表（tui）：
+	name	CharField类型,长度30		推荐名
+
+幻灯图表（banner）：
+	text_info	CharField类型,长度100		标题，图片信息
+	img		ImageField类型			图片类型，保存图片路径
+	link_url	URLField类型			图片链接的URL
+	is_active	BooleanField布尔类型		是否激活
+
+友情链接（link）：
+	name		CharField类型,长度100		友情链接的名称
+	linkurl		URLField类型			友情链接的url

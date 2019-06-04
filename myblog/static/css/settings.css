@@ -1,0 +1,20 @@
+
+.user-info{
+    margin-left: 180px;
+
+}
+.user-info h3{
+    margin-top: 20px;
+}
+.user-info #user-form{
+    margin-left: 100px;
+}
+.user-info #user-ul li{
+    line-height: 43px;
+}
+.user-info #user-ul-li li{
+    margin-top: 20px;
+}
+.user-info p{
+    margin-top: 25px;
+}
