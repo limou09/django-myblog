@@ -52,7 +52,6 @@ six==1.12.0
 tablib==0.13.0
 toml==0.10.0
 uritemplate==3.0.0
-urllib3==1.24.1
 w3lib==1.20.0
 xlrd==1.2.0
 XlsxWriter==1.1.8
